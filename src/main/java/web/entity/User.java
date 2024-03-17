@@ -1,11 +1,18 @@
 package web.entity;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "users")
 public class User {
+  @Id
+  @Column
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @Column
     private String name;
 
+    @Column
     private String surName;
 
     public User() {
@@ -14,7 +21,6 @@ public class User {
     public User(String name, String surName) {
         this.name = name;
         this.surName = surName;
-        id++;
     }
 
     public int getId() {
