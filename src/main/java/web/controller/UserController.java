@@ -26,28 +26,28 @@ public class UserController {
         return "users";
     }
 
-//    @GetMapping("/edit")
-//    public String edit(@RequestParam("id") int id, Model model) {
-//        model.addAttribute("user", userService.getAllUsers().get(id - 1));
-//        return "createOrUpdate";
-//    }
+    @GetMapping("/edit")
+    public String edit(@RequestParam("id") int id, Model model) {
+        model.addAttribute("user", userService.getUserById(id));
+        return "createOrUpdate";
+    }
 
-//    @GetMapping("/new")
-//    public String newUser(Model model) {
-//        model.addAttribute("user", new User());
-//        return "createOrUpdate";
-//    }
-//
-//    @PostMapping
-//    public String create(@ModelAttribute("user") User user) {
-//        userService.insertUser(user);
-//        return "redirect:/";
-//    }
-//
-//    @GetMapping("/delete")
-//    public String deleteUser(@RequestParam("id") int id, Model model) {
-//        model.addAttribute("user", userService.deleteUsersByID(id));
-//
-//        return "redirect:/";
-//    }
+    @GetMapping("/new")
+    public String newUser(Model model) {
+        model.addAttribute("user", new User());
+        return "createOrUpdate";
+    }
+
+    @PostMapping
+    public String create(@ModelAttribute("user") User user) {
+        userService.insertUser(user);
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete")
+    public String deleteUser(@RequestParam("id") int id, Model model) {
+        userService.deleteUsersByID(id);
+
+        return "redirect:/";
+    }
 }

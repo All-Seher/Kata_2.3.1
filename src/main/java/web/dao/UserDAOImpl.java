@@ -3,11 +3,9 @@ package web.dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import web.entity.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -38,25 +36,22 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void insertUser(User user) {
+    public User getUserById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(User.class, id);
+    }
 
-//        if (user.getId() == 0) {
-//            user.setId(++AUTO_ID);
-//            users.add(user);
-//        } else {
-//            user.setId(AUTO_ID);
-//            users.set(user.getId() - 1, user);
-//        }
+    @Override
+    public void insertUser(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(user);
     }
 
 
-
-
     @Override
-    public List<User> deleteUsersByID(int id) {
-//        AUTO_ID--;
-//        users.remove(id-1);
-//        return users;
-        return null;
+    public void deleteUsersByID(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        User userForDelete = session.get(User.class, id);
+        session.remove(userForDelete);
     }
 }
